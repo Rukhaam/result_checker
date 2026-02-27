@@ -5,7 +5,11 @@ export const fetchExams = createAsyncThunk(
   'exams/fetchExams',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get('http://localhost:5000/api/exams');
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/exams`, {
+        headers: {
+          'ngrok-skip-browser-warning': 'true' // Hardcoded right here!
+        }
+      });
       return response.data.data;
     } catch (error) {
       return rejectWithValue(

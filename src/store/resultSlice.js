@@ -6,10 +6,17 @@ export const fetchResult = createAsyncThunk(
   'result/fetchResult',
   async ({ examId, rollNumber }, { rejectWithValue }) => {
     try {
-      const response = await axios.post('http://localhost:5000/api/results/search', {
-        examId,
-        rollNumber,
-      });
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/results/search`, 
+        {
+          examId,
+          rollNumber,
+        },
+        {
+          headers: {
+            'ngrok-skip-browser-warning': 'true'
+          }
+        }
+      );
       return response.data.data; // The scorecard object from the backend
     } catch (error) {
       // Return the error message from our backend's ErrorHandler

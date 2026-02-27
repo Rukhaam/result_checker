@@ -10,7 +10,11 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors());
+// Add your Vercel URL to the allowed origins
+app.use(cors({
+    origin: ['http://localhost:5173', 'https://result-checker-olive.vercel.app'], // Replace with your actual Vercel URL
+    credentials: true
+}));
 app.use(express.json()); 
 
 // Mount Routes
